@@ -509,7 +509,7 @@ And push changes:
   git commit -a -m 'add testrepo with user mika@tweety'
   git push
 
-Create test repository on client:
+Create a test repository on the client(!):
 
   cd /tmp
   mkdir testrepo
@@ -524,7 +524,9 @@ Create test repository on client:
 Setup of git-daemon
 ~~~~~~~~~~~~~~~~~~~
 
-Make repositories available via git protocol:
+git-daemon provides repositories via git protocol. You can either
+use git-daemon via runit installing the Debian package git-daemon-run
+or via running git-daemon standalone. For the later option run:
 
   cd /etc/init.d
   wget 'http://git.grml.org/?p=grml-git-doc.git;a=blob_plain;f=git-daemon;hb=HEAD'
@@ -596,8 +598,11 @@ Notice: please consider use link:http://lucumr.pocoo.org/cogitations/2008/09/14/
 TODO
 ----
 
-* Better documentation of how to create/request new repositories and how to handle group permissions
-* Work out workflow for Debian packaging with regards to handling multiple (feature/people/...) branches
+* Better documentation of how to create/request new repositories and how to
+handle group permissions (work in progress)
+
+* Work out workflow for Debian packaging with regards to handling multiple
+(feature/people/...) branches
 
 About this document
 -------------------
