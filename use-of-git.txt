@@ -1,0 +1,463 @@
+Documentation of git
+====================
+
+Preface
+-------
+
+link:http://git.or.cz/[Git] is an open source, distributed version control
+system designed to handle everything from small to very large projects with
+speed and efficiency. Read the
+link:http://en.wikipedia.org/wiki/Git_(software)[wikipedia article on Git] to
+get an overview.
+
+[NOTE]
+
+This document is work progress. Your feedback is highly appreciated!
+
+Installation of Git
+-------------------
+
+Notice: this section is specific for Debian (based) systems.
+
+The core system
+~~~~~~~~~~~~~~~
+
+  # aptitude update
+  # aptitude install git-core git-doc
+
+Some further useful packages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  # aptitude update
+  # aptitude install git-buildpackage git-cvs git-email git-gui \
+                     git-load-dirs git-svn gitk gitosis gitpkg  \
+		     gitweb jigit python-git qgit sigit stgit topgit
+
+
+Recommended "Must read"
+-----------------------
+
+* The
+link:http://www.kernel.org/pub/software/scm/git/docs/gitrepository-layout.html[git-repository-layout]
+docs. Understanding the way git stores objects helps working with git.
+
+* The "SPECIFYING REVISIONS" section in manpage
+link:http://www.kernel.org/pub/software/scm/git/docs/git-rev-parse.html[git-rev-parse(1)].
+
+Server setup
+------------
+
+Setup of gitosis/git-daemon
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To be done...
+
+User setup
+~~~~~~~~~~
+
+To be done...
+
+Working with Git
+----------------
+
+Commands
+~~~~~~~~
+
+The most important commands
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Create a new repository:
+
+  % git init
+
+Clone an existing repository:
+
+ % git clone $URL
+
+Add a file to the repository (-i for interactive):
+
+  % git add [-i] [$file(s)]
+
+Remove a file from the repository:
+
+  % git rm $file
+
+Check status:
+
+  % git status
+
+List differences:
+
+  % git diff
+
+To commit a change:
+
+  % git commit -m "<some comment>"
+
+Commit all files via using the -a option:
+
+  % git commit -a -m "<some comment>"
+
+Fetch updates:
+
+  % git pull [branch]
+
+... which is just an abbreviation for:
+
+  % git fetch [branch] ; git merge [branch]
+
+Push your changes:
+
+  % git push [remote-branch] [local-branch]
+
+List all available branches:
+
+  % git branch -a
+
+Check out specific branch:
+
+  % git checkout <commit object>
+
+and switch back to master again:
+
+  % git checkout master
+
+Merge one or more branches into current branch:
+
+  % git merge [branch]
+
+Get a list of commits - the history:
+
+  % git log
+
+View commit information:
+
+  % git show
+
+Work with remote versions of the repository:
+
+  % git remote ...
+
+Create a patch:
+
+  % git format-patch [-M]
+
+Send patch via mail:
+
+  % git-send-email <patch_file(s)>
+
+Apply patch from mailbox file:
+
+  % git am ...
+
+Tagging (using signing):
+
+  % git tag -s v0.42 -m 'release 0.42'
+
+Configuration:
+
+  % git config ....
+
+Reset index and working directory to state of last commit:
+
+  % git reset --hard HEAD
+
+Rewrite commit history (-i for interactive):
+
+  % git rebase [-i] master
+
+Some further important commands
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Commit (add) just parts of a file:
+
+  % git add --patch
+
+Show a tree object:
+
+  % git ls-tree
+
+View object:
+
+  % git cat-file
+
+Searching:
+
+  % git grep
+
+Temporarily save changes without commiting:
+
+  % git stash
+
+Provide archive of repository/tree:
+
+  % git archive
+
+Check integrity of git repository:
+
+  % git fsck
+
+Garbage collection for the repository:
+
+  % git gc
+
+Remove dangling objects:
+
+  % git prune
+
+Work with the reflog:
+
+  % git reflog
+
+Display index:
+
+  % git ls-files --stage
+
+Debugging using binary search:
+
+  % git bisect [start|good|bad|...]
+
+Modify whole branches (like a massive rebase):
+
+  % git filter-branch
+
+Show what revision and author last modified each line of a file:
+
+  % git blame ...
+
+Configuration
+~~~~~~~~~~~~~
+
+Either globally:
+
+  % git config --global user.name "Michael Prokop"
+  % git config --global user.email "mika@grml.org"
+
+or per repository:
+
+  % git config user.name "Michael Prokop"
+  % git config user.email "mika@grml.org"
+
+A git configuration file just as a reference and for inspiration:
+
+  % cat ~/.gitconfig
+  [user]
+          name = Michael Prokop
+          email = mika@grml.org
+  [color]
+          diff = auto
+  [color "diff"]
+          new = cyan
+          old = magenta
+          frag = yellow
+          meta = green
+          commit = normal
+  [svn]
+          rmdir = true
+  [http]
+          sslVerify=false
+  [alias]
+          st = status
+          purge = !git checkout $(git rev-parse --show-cdup) && git clean -xdf
+
+Debian specific stuff
+---------------------
+
+Changelog handling
+~~~~~~~~~~~~~~~~~~
+
+Commit changes to the Debian changelog of a package:
+
+  % debcommit [-C]
+
+Generate the Debian changelog from git commit messages:
+
+  % git dch [--since 0.42]
+
+Integrate upstream sources in Git
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  % pristine-tar ...
+
+pristine-tar can regenerate a pristine upstream tarball using only a small
+binary delta file and a copy of the source which can be a revision control
+checkout.
+
+Import Debian packages into a Git repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  % git-import-dsc --pristine-tar $FILE.dsc
+
+Import an upstream source into a git repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  % git-import-orig /path/to/new-upstream.tar.gz -u 0.2
+
+Build Debian packages from a Git repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  % git-buildpackage
+
+Debian packaging related Resources
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* link:http://wiki.debian.org/PackagingWithGit[wiki.debian.org/PackagingWithGit]
+* link:http://wiki.debian.org/Games/VCS[documentation of the Debian-Game team]
+* link:file:///usr/share/doc/git-buildpackage/manual-html/index.html[local git-buildpackage documentation]
+* link:http://vcs-pkg.org/[vcs-pkg.org]
+* link:http://www.golden-gryphon.com/software/misc/packaging.html[Packaging software using Git]
+* link:http://meetings-archive.debian.net/pub/debian-meetings/2008/debconf8/low/547_Packaging_with_version_control_systems.ogg[Packaging with version control systems - Video]
+
+Tips and tricks for working
+---------------------------
+
+Solve merge conflicts
+~~~~~~~~~~~~~~~~~~~~~
+
+Example session:
+
+  % git checkout -b foo
+  % $EDITOR bla.txt
+  % git commit -a -m 'new feature: foo'
+  % git checkout master
+  % git merge foo
+  BAMM!
+  % git ls-files --stage
+  100644 c3382fdc386b6774e95e3a8bfdd083aa3004904b 0 bla.txt
+  100644 7abc07f0fcd2603606321dc7e3131453cf313da2 1 bla.txt
+  100644 7f16675fe783a8e4d1a8e672a8a4c1c25a1f61a0 2 bla.txt
+  % git cat-file blob $SHA1
+  % git cat-file commit $SHA1
+  % $EDITOR bla.txt
+  % git add bla.txt
+  % git commit -a -m 'merge branches'
+
+Force linear development
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use the .git/hooks/update script to allow only fast-forward-updates so only
+pushes of people using current HEAD are possible.
+
+Move current development into a dedicated branch
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Very useful if you forgot to checkout a separate branch for working, so move the
+into a branch as if you were developing it there since the very beginning:
+
+  % git branch topic/wip
+  % git reset --hard '@{2 hours ago}'
+  % git checkout topic/wip
+
+Bidirectional operation between subversion and git
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use git-svn, like:
+
+  % git-svn clone http://... foo
+  % cd foo
+  % git commit ...
+  % git-svn rebase # like svn up
+  % git-svn dcommit # push changes to SVN repository
+  % git-svn show-ignore >> .git/info/exclude # import svn:ignore properties
+
+Further information available for example in
+"link:http://michael-prokop.at/blog/2007/12/03/git-svn-in-30-minutes/[git-svn
+in 30 minutes]", "link:http://git.or.cz/course/svn.html[Git - SVN Crash
+Course]" and "link:http://utsl.gen.nz/talks/git-svn/intro.html[An introduction
+to git-svn for Subversion/SVK users and deserters]".
+
+Automatic testing of recent version
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+link:http://github.com/apenwarr/gitbuilder/tree/master[gitbuilder] tests the
+most recent versions of all tags and branches in your project.
+
+Graphical interfaces
+~~~~~~~~~~~~~~~~~~~~
+
+* link:http://www.kernel.org/pub/software/scm/git/docs/gitk.html[gitk]: git repository browser
+* link:http://www.kernel.org/pub/software/scm/git/docs/git-gui.html[git-gui]: a portable graphical interface to Git
+* link:http://digilander.libero.it/mcostalba/[qgit]: Qt application for viewing GIT trees
+* link:http://jonas.nitro.dk/tig/[tgit]: ncurses-based Git repository browser
+
+Patch management
+~~~~~~~~~~~~~~~~
+
+* link:http://repo.or.cz/w/topgit.git[topgit]: a Git patch queue manager
+* link:http://procode.org/stgit/[stgit]: manage stacks of patches in a git repository
+* link:http://www.kernel.org/pub/linux/kernel/people/jsipek/guilt/man/[guilt]: quilt for git; similar to Mercurial queues
+
+Resources
+---------
+
+Online stuff
+~~~~~~~~~~~~
+
+* link:http://www.kernel.org/pub/software/scm/git/docs/user-manual.html[Git User's Manual (for version 1.5.3 or newer)]
+
+* link:http://git.or.cz/gitwiki/FrontPage[Git Wiki]
+
+* link:http://www.kernel.org/pub/software/scm/git/docs/[git(1) Manual Page]
+
+* link:http://www.kernel.org/pub/software/scm/git/docs/gittutorial.html[gittutorial(7)]
+
+* link:http://www.kernel.org/pub/software/scm/git/docs/everyday.html[Everyday GIT With 20 Commands Or So]
+
+* link:http://ktown.kde.org/~zrusin/git/[Git Cheat Sheet]
+
+* link:http://cworth.org/hgbook-git/tour/[A tour of git: the basics]
+
+* link:http://eagain.net/articles/git-for-computer-scientists/[Git for Computer Scientists]
+
+* link:http://www-cs-students.stanford.edu/\~blynn/gitmagic/[Gitmagic]
+
+* link:http://linux.yyz.us/git-howto.html[Kernel Hackers' Guide to git]
+
+* link:http://repo.or.cz/w/git.git?a=blob;f=Documentation/SubmittingPatches;hb=HEAD[Submitting Patches - some guidelines]
+
+Books
+~~~~~
+
+* Free book about Git: link:http://book.git-scm.com/[http://book.git-scm.com/]
+
+Videos / Talks
+~~~~~~~~~~~~~~
+
+* link:http://video.google.com/videoplay?docid=-2199332044603874737&vt=lf&hl=en[Git talk by Linus Torvalds] (link:http://git.or.cz/gitwiki/LinusTalk200705Transcript[transcript of the talk])
+
+* link:http://video.google.com/videoplay?docid=1251251453592758541[Git talk by Randal Schwartz]
+
+PDFs/ Slides
+~~~~~~~~~~~~
+
+* German git talk ("Sourcecode Management mit GIT") by Clifford Wolf: link:http://www.clifford.at/papers/2008/git/slides.pdf[slides.pdf]
+
+* Git Internals - PDF and Screencast (costs 9$): link:http://peepcode.com/products/git-internals-pdf[peepcode.com/products/git-internals-pdf]
+
+* Git workshop by Maximilian Attems: link:http://grml.org/git/git_workshop_metalab07.pdf[git_workshop_metalab07.pdf]
+
+* Git tricks by Maximilian Attems: link:http://grml.or/git/git_tricks.pdf[git_tricks.pdf]
+
+* Git talk by Bart Trojanowski: link:http://www.jukie.net/~bart/slides/intro-to-git/intro-to-git.pdf[intro-to-git.pdf]
+
+Git-Hosting
+~~~~~~~~~~~
+
+Notice: please consider use link:http://lucumr.pocoo.org/cogitations/2008/09/14/bitbucket-is-no-bit-bucket/[with care].
+
+* link:http://github.com/[GitHub]: commercial, but free for Open Source projects
+* link:http://gitorious.org/[Gitorious]: free Git hosting
+* link:http://repo.or.cz/[repo.or.cz]: free Git hosting
+
+TODO
+----
+
+* Work out workflow for Debian packaging with regards to handling multiple (feature/people/...) branches
+* Setup of a Git repository server
+
+About this document
+-------------------
+
+(c) Michael Prokop <mika@grml.org>
+
+// vim: ft=asciidoc autoindent textwidth=75 formatoptions=tcqn
