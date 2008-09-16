@@ -33,15 +33,16 @@ Activate backports and install software
   Pin-Priority: 999
   EOF
 
-Direct installation will fail due to problem in python-setuptools
-(0.6c8-4~bpo40+1), therefor manual intervention through dpkg.
+Direct installation might fail due to problem in python-setuptools
+(version 0.6c8-4~bpo40+1), therefor manual intervention through dpkg
+in between:
 
   aptitude install git-core git-buildpackage gitosis devscripts gitweb
   dpkg -i /var/cache/apt/archives/python-setuptools_0.6c8-4\~bpo40+1_all.deb
   aptitude install git-core git-buildpackage gitosis devscripts gitweb
 
-Setup apache2
--------------
+Setup of apache2
+----------------
 
 See also /usr/share/doc/git-core/README.Debian
 
@@ -70,8 +71,15 @@ See also /usr/share/doc/git-core/README.Debian
           RedirectMatch permanent "^/~(.*)$" "http://example.org/~$1"
   </VirtualHost>
 
+[NOTE]
+
+If you use lighttpd instead of apache2 check out
+http://git.grml.org/?p=grml-git-doc.git;a=blob_plain;f=20-git.conf;hb=HEAD
+
 Configure gitweb
 ----------------
+
+Adjust configuration file /etc/gitweb.conf:
 
   $EDITOR /etc/gitweb.conf
   [...]
@@ -84,10 +92,6 @@ Configure gitweb
   # choose to allow gitweb to show only repositories that git-daemon
   # is already sharing anonymously.
   $export_ok = "git-daemon-export-ok";
-
-  #$projectroot = "/srv/gitosis/repositories";
-  #$projects_list = "/srv/gitosis/gitosis/projects.list";
-  #@git_base_url_list = "git://git.grml.org";
 
 User setup
 ----------
@@ -143,6 +147,6 @@ Setup of git-daemon
 Make repositories available via git protocol:
 
   cd /etc/init.d
-  wget http://grml.org/git/git-daemon
+  wget 'http://git.grml.org/?p=grml-git-doc.git;a=blob_plain;f=git-daemon;hb=HEAD'
   chmod +x ./git-daemon
   /etc/init.d/git-daemon start
