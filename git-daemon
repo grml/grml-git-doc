@@ -46,9 +46,6 @@ do_start()
         start-stop-daemon --start --quiet --exec $DAEMON -- \
                 $DAEMON_ARGS \
                 || return 2
-        # Add code here, if necessary, that waits for the process to be ready
-        # to handle requests from services started subsequently which depend
-        # on this one.  As a last resort, sleep for some time.
 }
 
 #
@@ -77,19 +74,6 @@ do_stop()
         return "$RETVAL"
 }
 
-#
-# Function that sends a SIGHUP to the daemon/service
-#
-do_reload() {
-        #
-        # If the daemon can reload its configuration without
-        # restarting (for example, when it is sent a SIGHUP),
-        # then implement that here.
-        #
-        start-stop-daemon --stop --signal 1 --quiet --pidfile $PIDFILE --name $NAME
-        return 0
-}
-
 case "$1" in
   start)
         [ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC" "$NAME"
@@ -108,10 +92,6 @@ case "$1" in
         esac
         ;;
   restart|force-reload)
-        #
-        # If the "reload" option is implemented then remove the
-        # 'force-reload' alias
-        #
         log_daemon_msg "Restarting $DESC" "$NAME"
         do_stop
         case "$?" in
