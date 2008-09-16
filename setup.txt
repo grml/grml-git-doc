@@ -604,6 +604,8 @@ handle group permissions (work in progress)
 * Work out workflow for Debian packaging with regards to handling multiple
 (feature/people/...) branches
 
+* Setup of hooks for stuff like commit mails
+
 About this document
 -------------------
 
