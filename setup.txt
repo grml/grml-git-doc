@@ -354,6 +354,16 @@ in 30 minutes]", "link:http://git.or.cz/course/svn.html[Git - SVN Crash
 Course]" and "link:http://utsl.gen.nz/talks/git-svn/intro.html[An introduction
 to git-svn for Subversion/SVK users and deserters]".
 
+Manage several repositories at once
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+link:http://joey.kitenet.net/code/mr/[mr] is a Multiple Repository
+management tool which can checkout, update, or perform other actions on a
+set of repositories as if they were one combined respository. It supports
+any combination of subversion, git, cvs, mecurial, bzr, and darcs
+repositories, and support for other revision control systems can easily be
+added.
+
 Automatic testing of recent version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -532,6 +542,13 @@ or via running git-daemon standalone. For the later option run:
   wget 'http://git.grml.org/?p=grml-git-doc.git;a=blob_plain;f=git-daemon;hb=HEAD'
   chmod +x ./git-daemon
   /etc/init.d/git-daemon start
+
+Working with the server setup
+-----------------------------
+
+Check out a repository running:
+
+  % git clone ssh://git@git.grml.org/grml-git-doc.git
 
 Resources
 ---------
