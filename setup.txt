@@ -227,6 +227,9 @@ Migrating from other VCS
   +-----------------+-------------+---------------------+
   | git init        | hg create   | svnadmin create ... |
   +-----------------+-------------+---------------------+
+  | git add . &&    | hg addremove|                     |
+  | git commit -a   | hg commit   |                     |
+  +-----------------+-------------+---------------------+
 
 Configuration
 ~~~~~~~~~~~~~
