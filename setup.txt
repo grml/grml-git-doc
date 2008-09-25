@@ -376,7 +376,7 @@ Graphical interfaces
 * link:http://www.kernel.org/pub/software/scm/git/docs/gitk.html[gitk]: git repository browser
 * link:http://www.kernel.org/pub/software/scm/git/docs/git-gui.html[git-gui]: a portable graphical interface to Git
 * link:http://digilander.libero.it/mcostalba/[qgit]: Qt application for viewing GIT trees
-* link:http://jonas.nitro.dk/tig/[tgit]: ncurses-based Git repository browser
+* link:http://jonas.nitro.dk/tig/[tig]: ncurses-based Git repository browser
 
 Patch management
 ~~~~~~~~~~~~~~~~
