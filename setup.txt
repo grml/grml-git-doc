@@ -213,6 +213,21 @@ Show what revision and author last modified each line of a file:
 
   % git blame ...
 
+Migrating from other VCS
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+  +-----------------+-------------+---------------------+
+  | git             | mercurial   | svn                 |
+  +-----------------+-------------+---------------------+
+  | git status      | hg status   | svn status          |
+  +-----------------+-------------+---------------------+
+  | git pull        | hg pull -u  | svn update          |
+  +-----------------+-------------+---------------------+
+  | git commit [-a] | hg commit   | svn commit          |
+  +-----------------+-------------+---------------------+
+  | git init        | hg create   | svnadmin create ... |
+  +-----------------+-------------+---------------------+
+
 Configuration
 ~~~~~~~~~~~~~
 
