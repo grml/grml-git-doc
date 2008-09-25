@@ -216,17 +216,21 @@ Show what revision and author last modified each line of a file:
 Migrating from other VCS
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-  +-----------------+-------------+---------------------+
-  | git             | mercurial   | svn                 |
-  +-----------------+-------------+---------------------+
-  | git status      | hg status   | svn status          |
-  +-----------------+-------------+---------------------+
-  | git pull        | hg pull -u  | svn update          |
-  +-----------------+-------------+---------------------+
-  | git commit [-a] | hg commit   | svn commit          |
-  +-----------------+-------------+---------------------+
-  | git init        | hg create   | svnadmin create ... |
-  +-----------------+-------------+---------------------+
+  +---------------------+-------------------+---------------------+
+  | Git                 | Mercurial         | Subversion          |
+  +---------------------+-------------------+---------------------+
+  | git status          | hg status         | svn status          |
+  +---------------------+-------------------+---------------------+
+  | git pull            | hg pull -u        | svn update          |
+  +---------------------+-------------------+---------------------+
+  | git commit [-a]     | hg commit         | svn commit          |
+  +---------------------+-------------------+---------------------+
+  | git init            | hg create         | svnadmin create ... |
+  +---------------------+-------------------+---------------------+
+  | git push --dry-run  | hg outgoing       | -                   |
+  +---------------------+-------------------+---------------------+
+  | git-buildpackage    | hg-buildpackage   | svn-buildpackage    |
+  +---------------------+-------------------+---------------------+
 
 Configuration
 ~~~~~~~~~~~~~
@@ -517,17 +521,29 @@ command line on the client with the id_rsa.pub key:
 
 Edit gitosis.conf of gitosis-admin repository:
 
-  [gitosis]
-  gitweb = yes
-  gitdaemon = yes
-
+  # Permissions:
   [group gitosis-admin]
   writable = gitosis-admin
   members = mika@tweety
 
+  [group coreteam]
+  members = mika@tweety gebi
+  # gebi = Michael Gebetsroither
+  writable = grml-git-tools grml-git-doc
+
+  # Testrepos:
   [group mika]
   writable = testrepo
   members = mika@tweety
+
+  # Repositories:
+  [repo grml-git-doc]
+  description = Documentation of git at grml
+  owner = Michael Prokop <mika@grml.org>
+
+  [repo grml-git-tools]
+  description = Useful addons for work with git
+  owner = Michael Prokop <mika@grml.org>
 
 And push changes:
 
@@ -540,11 +556,11 @@ Create a test repository on the client(!):
   mkdir testrepo
   cd testrepo
   git init
-  git remote add origin git@git.grml.org:testrepo.git
+  git remote add origin ssh://git@git.grml.org:testrepo.git
   echo testfile > testfile
   git add testfile
   git commit -a -m 'initial checkin'
-  git push origin
+  git push origin master
 
 Setup of git-daemon
 ~~~~~~~~~~~~~~~~~~~
@@ -605,6 +621,8 @@ Videos / Talks
 
 * link:http://video.google.com/videoplay?docid=1251251453592758541[Git talk by Randal Schwartz]
 
+* link:http://gitcasts.com/posts/railsconf-git-talk[RailsConf Git Talk]
+
 PDFs/ Slides
 ~~~~~~~~~~~~
 
@@ -641,6 +659,12 @@ handle group permissions (work in progress)
 About this document
 -------------------
 
-(c) Michael Prokop <mika@grml.org>
+Main author:
+
+* Michael Prokop <mika@grml.org>
+
+Contributors:
+
+* Michael Gebetsroither <gebi@grml.org>
 
 // vim: ft=asciidoc autoindent textwidth=75 formatoptions=tcqn
