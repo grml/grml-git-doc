@@ -231,6 +231,9 @@ Migrating from other VCS
   +---------------------+-------------------+---------------------+
   | git-buildpackage    | hg-buildpackage   | svn-buildpackage    |
   +---------------------+-------------------+---------------------+
+  | git add . &&        | hg addremove      |                     |
+  | git commit -a       | hg commit         |                     |
+  +---------------------+-------------------+---------------------+
 
 Configuration
 ~~~~~~~~~~~~~
