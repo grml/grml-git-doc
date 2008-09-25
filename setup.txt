@@ -32,7 +32,8 @@ Some further useful packages
   # aptitude update
   # aptitude install git-buildpackage git-cvs git-email git-gui \
                      git-load-dirs git-svn gitk gitosis gitpkg  \
-		     gitweb jigit python-git qgit sigit stgit topgit
+		     gitweb jigit python-git qgit sigit stgit \
+		     tig topgit
 
 
 Recommended "Must read"
@@ -140,7 +141,7 @@ Apply patch from mailbox file:
 
 Tagging (using signing):
 
-  % git tag -s v0.42 -m 'release 0.42'
+  % git tag -s v0.42 -m 'release 0.42' # and don't forget: 'git push --tags'
 
 Configuration:
 
