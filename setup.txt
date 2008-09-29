@@ -8,7 +8,7 @@ link:http://git.or.cz/[Git] is an open source, distributed version control
 system designed to handle everything from small to very large projects with
 speed and efficiency. Read the
 link:http://en.wikipedia.org/wiki/Git_(software)[wikipedia article on Git] to
-get an overview.
+get an (not so short) overview.
 
 [NOTE]
 
@@ -217,24 +217,27 @@ Show what revision and author last modified each line of a file:
 Migrating from other VCS
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-  +---------------------+-------------------+---------------------+
-  | Git                 | Mercurial         | Subversion          |
-  +---------------------+-------------------+---------------------+
-  | git status          | hg status         | svn status          |
-  +---------------------+-------------------+---------------------+
-  | git pull            | hg pull -u        | svn update          |
-  +---------------------+-------------------+---------------------+
-  | git commit [-a]     | hg commit         | svn commit          |
-  +---------------------+-------------------+---------------------+
-  | git init            | hg create         | svnadmin create ... |
-  +---------------------+-------------------+---------------------+
-  | git push --dry-run  | hg outgoing       | -                   |
-  +---------------------+-------------------+---------------------+
-  | git-buildpackage    | hg-buildpackage   | svn-buildpackage    |
-  +---------------------+-------------------+---------------------+
-  | git add . &&        | hg addremove &&   |                     |
-  | git commit -a       | hg commit         |                     |
-  +---------------------+-------------------+---------------------+
+  +--------------------------+-----------------------+---------------------+
+  | Git                      | Mercurial             | Subversion          |
+  +--------------------------+-----------------------+---------------------+
+  | git status               | hg status             | svn status          |
+  +--------------------------+-----------------------+---------------------+
+  | git pull                 | hg pull -u            | svn update          |
+  +--------------------------+-----------------------+---------------------+
+  | git commit [-a]          | hg commit             | svn commit          |
+  +--------------------------+-----------------------+---------------------+
+  | git init                 | hg create             | svnadmin create ... |
+  +--------------------------+-----------------------+---------------------+
+  | git push --dry-run       | hg outgoing           | -                   |
+  +--------------------------+-----------------------+---------------------+
+  | git-buildpackage         | hg-buildpackage       | svn-buildpackage    |
+  +--------------------------+-----------------------+---------------------+
+  | git add . &&             | hg addremove &&       | -                   |
+  | git commit -a            | hg commit             |                     |
+  +--------------------------+-----------------------+---------------------+
+  | see section "Simple      | hg serve              | -                   |
+  | serving of repositories" |                       |                     |
+  +--------------------------+-----------------------+---------------------+
 
 Configuration
 ~~~~~~~~~~~~~
@@ -269,7 +272,9 @@ A git configuration file just as a reference and for inspiration:
           sslVerify=false
   [alias]
           st = status
+	  ci = commit
           purge = !git checkout $(git rev-parse --show-cdup) && git clean -xdf
+	  serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
 
 Debian specific stuff
 ---------------------
@@ -342,6 +347,31 @@ Example session:
   % $EDITOR bla.txt
   % git add bla.txt
   % git commit -a -m 'merge branches'
+
+Simple serving of repositories
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use the following alias in your ~/.gitconfig:
+
+  [alias]
+        serve = !git daemon --reuseaddr --verbose  --base-path=. -export-all ./.git
+
+and when executing 'git serve' in a repository someone
+can access it through git://$IPADDRESS/, like:
+
+  git ls-remote git://127.0.0.1/
+
+or
+
+  git clone git://192.168.0.1/ reposname
+
+where the IP address corresponds with the system where 'git serve' has been
+executed of course.
+
+[NOTE]
+
+Make sure to use a "/" at the end of the URL when using the git protocol
+("git://")!
 
 Force linear development
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -649,6 +679,13 @@ Notice: please consider use link:http://lucumr.pocoo.org/cogitations/2008/09/14/
 * link:http://gitorious.org/[Gitorious]: free Git hosting
 * link:http://repo.or.cz/[repo.or.cz]: free Git hosting
 
+Limitations of git
+~~~~~~~~~~~~~~~~~~
+
+* (currently) lack of real partial trees (work in progress)
+
+* undetailed errors messages of git daemon like "fatal: The remote end hung up unexpectedly"
+
 TODO
 ----
 
@@ -656,7 +693,7 @@ TODO
 handle group permissions (work in progress)
 
 * Work out workflow for Debian packaging with regards to handling multiple
-(feature/people/...) branches
+(feature/people/...) branches (for example with topgit)
 
 * Setup of hooks for stuff like commit mails
 
