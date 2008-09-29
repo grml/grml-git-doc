@@ -275,6 +275,10 @@ A git configuration file just as a reference and for inspiration:
 	  ci = commit
           purge = !git checkout $(git rev-parse --show-cdup) && git clean -xdf
 	  serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+          graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format: %h -> { %p }' \"$@\" | sed 's/[0-9a-f]\\+/\"&\"/g' ; echo '}'; }; %f"
+
+The above configuration file is available as
+link:http://git.grml.org/?p=grml-git-doc.git;a=blob_plain;f=gitconfig-sample.txt;hb=HEAD[gitconfig-sample.txt].
 
 Debian specific stuff
 ---------------------
@@ -372,6 +376,22 @@ executed of course.
 
 Make sure to use a "/" at the end of the URL when using the git protocol
 ("git://")!
+
+Use graphviz for display
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Configure ~/.gitconfig:
+
+  [alias]
+        graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format: %h -> { %p }' \"$@\" | sed 's/[0-9a-f]\\+/\"&\"/g' ; echo '}'; }; %f"
+
+and then run something like:
+
+  git graphviz HEAD^^..HEAD | dotty /dev/stdin
+  git graphviz --first-parent master | dotty /dev/stdin
+
+Tip taken from
+link:http://git.or.cz/gitwiki/Aliases[http://git.or.cz/gitwiki/Aliases].
 
 Force linear development
 ~~~~~~~~~~~~~~~~~~~~~~~~

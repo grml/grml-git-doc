@@ -1,0 +1,21 @@
+[user]
+	name = Michael Prokop
+	email = mika@grml.org
+[color]
+        diff = auto
+[color "diff"]
+        new = cyan
+        old = magenta
+        frag = yellow
+        meta = green
+        commit = normal
+[svn]
+	rmdir = true
+[http]
+        sslVerify=false
+[alias]
+	st = status
+	ci = commit
+	purge = !git checkout $(git rev-parse --show-cdup) && git clean -xdf
+	serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+	graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f]\\+/\"&\"/g' ; echo '}'; }; f"
