@@ -636,7 +636,7 @@ PDFs/ Slides
 
 * Git workshop by Maximilian Attems: link:http://grml.org/git/git_workshop_metalab07.pdf[git_workshop_metalab07.pdf]
 
-* Git tricks by Maximilian Attems: link:http://grml.or/git/git_tricks.pdf[git_tricks.pdf]
+* Git tricks by Maximilian Attems: link:http://grml.org/git/git_tricks.pdf[git_tricks.pdf]
 
 * Git talk by Bart Trojanowski: link:http://www.jukie.net/~bart/slides/intro-to-git/intro-to-git.pdf[intro-to-git.pdf]
 
