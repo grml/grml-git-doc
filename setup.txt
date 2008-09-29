@@ -670,5 +670,6 @@ Main author:
 Contributors:
 
 * Michael Gebetsroither <gebi@grml.org>
+* Frank Terbeck <ft@grml.org>
 
 // vim: ft=asciidoc autoindent textwidth=75 formatoptions=tcqn
