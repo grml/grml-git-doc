@@ -534,6 +534,7 @@ See also /usr/share/doc/git-core/README.Debian
 [NOTE]
 
 If you use lighttpd instead of apache2 check out
+/usr/share/doc/gitosis/examples/lighttpd-gitweb.conf and
 link:http://git.grml.org/?p=grml-git-doc.git;a=blob_plain;f=20-git.conf;hb=HEAD[20-git.conf].
 
 Configure gitweb
@@ -546,6 +547,8 @@ Adjust configuration file /etc/gitweb.conf:
   $projectroot = "/home/git/repositories";
   $projects_list = "/home/git/gitosis/projects.list";
   @git_base_url_list = "git://git.grml.org";
+  # to use your own header text on the startpage:
+  # $home_text = "/home/git/gitweb-header.txt";
 
   # By default, gitweb will happily let people browse any repository
   # they guess the name of. This may or may not be what you wanted.  I
