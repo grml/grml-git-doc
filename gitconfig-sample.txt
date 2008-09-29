@@ -1,3 +1,10 @@
+# Filename:      ~/.gitconfig
+# Purpose:       configuration file for git(1)
+# Authors:       grml-team (grml.org), (c) Michael Prokop <mika@grml.org>
+# Bug-Reports:   see http://grml.org/bugs/
+# License:       This file is licensed under the GPL v2 or any later version.
+################################################################################
+
 [user]
 	name = Michael Prokop
 	email = mika@grml.org
@@ -19,3 +26,6 @@
 	purge = !git checkout $(git rev-parse --show-cdup) && git clean -xdf
 	serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
 	graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f]\\+/\"&\"/g' ; echo '}'; }; f"
+	#serve = !sh -c 'git daemon --reuseaddr --verbose \"$1\" \"$@\" --base-path=. --export-all ./.git'
+
+## END OF FILE #################################################################
