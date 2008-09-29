@@ -129,11 +129,11 @@ Work with remote versions of the repository:
 
 Create a patch:
 
-  % git format-patch [-M]
+  % git format-patch [-s -p origin/master]
 
 Send patch via mail:
 
-  % git-send-email <patch_file(s)>
+  % git send-email <patch_file(s)>
 
 Apply patch from mailbox file:
 
@@ -150,6 +150,11 @@ Configuration:
 Reset index and working directory to state of last commit:
 
   % git reset --hard HEAD
+
+Rework last commit:
+
+  % $EDITOR [<path/to/file>] # not necessary, depends on what you want to do
+  % git commit --amend [<path/to/file>]
 
 Rewrite commit history (-i for interactive):
 
@@ -230,7 +235,7 @@ Migrating from other VCS
   +--------------------------+-----------------------+---------------------+
   | git push --dry-run       | hg outgoing           | -                   |
   +--------------------------+-----------------------+---------------------+
-  | git-buildpackage         | hg-buildpackage       | svn-buildpackage    |
+  | git buildpackage         | hg-buildpackage       | svn-buildpackage    |
   +--------------------------+-----------------------+---------------------+
   | git add . &&             | hg addremove &&       | -                   |
   | git commit -a            | hg commit             |                     |
@@ -306,17 +311,17 @@ checkout.
 Import Debian packages into a Git repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  % git-import-dsc --pristine-tar $FILE.dsc
+  % git import-dsc --pristine-tar $FILE.dsc
 
 Import an upstream source into a git repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  % git-import-orig /path/to/new-upstream.tar.gz -u 0.2
+  % git import-orig /path/to/new-upstream.tar.gz -u 0.2
 
 Build Debian packages from a Git repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  % git-buildpackage
+  % git buildpackage
 
 Debian packaging related Resources
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -412,14 +417,14 @@ into a branch as if you were developing it there since the very beginning:
 Bidirectional operation between subversion and git
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use git-svn, like:
+Use git svn, like:
 
-  % git-svn clone http://... foo
+  % git svn clone http://... foo
   % cd foo
   % git commit ...
-  % git-svn rebase # like svn up
-  % git-svn dcommit # push changes to SVN repository
-  % git-svn show-ignore >> .git/info/exclude # import svn:ignore properties
+  % git svn rebase # like svn up
+  % git svn dcommit # push changes to SVN repository
+  % git svn show-ignore >> .git/info/exclude # import svn:ignore properties
 
 Further information available for example in
 "link:http://michael-prokop.at/blog/2007/12/03/git-svn-in-30-minutes/[git-svn
@@ -712,13 +717,23 @@ Limitations of git
 TODO
 ----
 
+* Setup of hooks for stuff like commit mails
+
+* Adjust all XS-Vcs headers in debian/control of all packages
+
+* Adjust all URLs pointing to hg (grml.org, grml-zsh-refcard,...)
+
 * Better documentation of how to create/request new repositories and how to
 handle group permissions (work in progress)
 
 * Work out workflow for Debian packaging with regards to handling multiple
 (feature/people/...) branches (for example with topgit)
 
-* Setup of hooks for stuff like commit mails
+* Integrate with link:https://www.ohloh.net/[ohloh.net]
+
+* Provide working gitconfig file for grml-etc-core (work in progress)
+
+* Integrate documentation for hg-to-git
 
 About this document
 -------------------
