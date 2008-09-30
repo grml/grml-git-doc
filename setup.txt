@@ -737,7 +737,11 @@ handle group permissions (work in progress)
 
 * Provide working gitconfig file for grml-etc-core (work in progress)
 
-* Integrate documentation for hg-to-git
+* Integrate documentation for hg-to-git in this document
+
+* Integrate link:http://git.or.cz/gitwiki/GitBot[Gitbot] in #grml[dev]?
+
+* Integrate link:http://git.or.cz/gitwiki/InterfacesFrontendsAndTools#head-d03281480d2cc49776ae3bafef4942a7ebd80a7f[CIAbot] in #grml[dev]?
 
 About this document
 -------------------
