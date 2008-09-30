@@ -612,13 +612,13 @@ And push changes:
   git commit -a -m 'add testrepo with user mika@tweety'
   git push
 
-Create a test repository on the client(!):
+Create a test repository on the client(!) and push it to the server:
 
   cd /tmp
   mkdir testrepo
   cd testrepo
   git init
-  git remote add origin ssh://git@git.grml.org:testrepo.git
+  git remote add origin ssh://git@git.grml.org/testrepo.git
   echo testfile > testfile
   git add testfile
   git commit -a -m 'initial checkin'
@@ -639,9 +639,13 @@ or via running git-daemon standalone. For the later option run:
 Working with the server setup
 -----------------------------
 
-Check out a repository running:
+Members with ssh permissions can clone the repository running:
 
-  % git clone ssh://git@git.grml.org/grml-git-doc.git
+  % git clone ssh://git@git.grml.org/testrepo
+
+Anonymous check out using the git protocol via:
+
+  % git clone git://git.grml.org/testrepo
 
 Resources
 ---------
