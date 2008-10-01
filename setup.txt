@@ -219,6 +219,14 @@ Show what revision and author last modified each line of a file:
 
   % git blame ...
 
+Delete a remote branch:
+
+  % git push origin :branch-to-delete
+
+Delete stale branches that already been removed from the remote repository:
+
+  % git remote prune origin
+
 Migrating from other VCS
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -410,6 +418,7 @@ Move current development into a dedicated branch
 Very useful if you forgot to checkout a separate branch for working, so move the
 into a branch as if you were developing it there since the very beginning:
 
+  % git commit ... # to make sure you don't lose anything
   % git branch topic/wip
   % git reset --hard '@{2 hours ago}'
   % git checkout topic/wip
