@@ -265,33 +265,9 @@ or per repository:
   % git config user.name "Michael Prokop"
   % git config user.email "mika@grml.org"
 
-A git configuration file just as a reference and for inspiration:
-
-  % cat ~/.gitconfig
-  [user]
-          name = Michael Prokop
-          email = mika@grml.org
-  [color]
-          diff = auto
-  [color "diff"]
-          new = cyan
-          old = magenta
-          frag = yellow
-          meta = green
-          commit = normal
-  [svn]
-          rmdir = true
-  [http]
-          sslVerify=false
-  [alias]
-          st = status
-	  ci = commit
-          purge = !git checkout $(git rev-parse --show-cdup) && git clean -xdf
-	  serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
-          graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format: %h -> { %p }' \"$@\" | sed 's/[0-9a-f]\\+/\"&\"/g' ; echo '}'; }; %f"
-
-The above configuration file is available as
-link:http://git.grml.org/?p=grml-git-doc.git;a=blob_plain;f=gitconfig-sample.txt;hb=HEAD[gitconfig-sample.txt].
+A git configuration file for inspiration is available online via
+link:http://git.grml.org/?p=grml-etc-core.git;a=blob_plain;f=etc/skel/.gitconfig[gitconfig
+at grml-etc-core].
 
 Debian specific stuff
 ---------------------
