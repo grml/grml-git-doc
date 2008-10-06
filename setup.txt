@@ -632,6 +632,9 @@ Anonymous check out using the git protocol via:
 
   % git clone git://git.grml.org/testrepo
 
+Do not add a trailing slash (as in ssh://git.grml.org/grml-repo.git/)
+to the remote repository's URL.
+
 Resources
 ---------
 
