@@ -30,7 +30,7 @@ Some further useful packages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   # aptitude update
-  # aptitude install git-buildpackage git-cvs git-email git-gui \
+  # aptitude install git-buildpackage git-cola git-cvs git-email git-gui \
                      git-load-dirs git-svn gitk gitosis gitpkg  \
 		     gitweb jigit python-git qgit sigit stgit \
 		     tig topgit
@@ -436,6 +436,7 @@ most recent versions of all tags and branches in your project.
 Graphical interfaces
 ~~~~~~~~~~~~~~~~~~~~
 
+* link:http://cola.tuxfamily.org/[git-cola]: highly caffeinated git gui
 * link:http://www.kernel.org/pub/software/scm/git/docs/gitk.html[gitk]: git repository browser
 * link:http://www.kernel.org/pub/software/scm/git/docs/git-gui.html[git-gui]: a portable graphical interface to Git
 * link:http://digilander.libero.it/mcostalba/[qgit]: Qt application for viewing GIT trees
