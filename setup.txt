@@ -618,7 +618,7 @@ use git-daemon via runit installing the Debian package git-daemon-run
 or via running git-daemon standalone. For the later option run:
 
   cd /etc/init.d
-  wget 'http://git.grml.org/?p=grml-git-doc.git;a=blob_plain;f=git-daemon;hb=HEAD'
+  wget -O git-daemon 'http://git.grml.org/?p=grml-git-doc.git;a=blob_plain;f=git-daemon;hb=HEAD'
   chmod +x ./git-daemon
   /etc/init.d/git-daemon start
 
