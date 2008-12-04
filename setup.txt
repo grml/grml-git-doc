@@ -558,6 +558,7 @@ damages through Debian packages):
   adduser --system --home /home/git --shell /bin/sh --disabled-password --gecos 'git repository hosting' --ingroup git git
   sudo -H -u git gitosis-init < /home/mika/.ssh/id_rsa.pub
   chgrp -R www-data /home/git
+  chmod 2755 /home/git/repositories
 
 Configuration of gitosis-admin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
