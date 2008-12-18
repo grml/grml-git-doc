@@ -697,7 +697,6 @@ Git-Hosting
 
 Notice: please consider use link:http://lucumr.pocoo.org/cogitations/2008/09/14/bitbucket-is-no-bit-bucket/[with care].
 
-* link:http://github.com/[GitHub]: commercial, but free for Open Source projects
 * link:http://gitorious.org/[Gitorious]: free Git hosting
 * link:http://repo.or.cz/[repo.or.cz]: free Git hosting
 
